@@ -83,7 +83,7 @@ namespace Aurora.Game.Screens
                 for (int i = 0; i < TitleText.Children.Count; i++)
                 {
                     int index = i;
-                    Scheduler.AddDelayed(() => TitleText.Children[index].FadeIn(1000D), 500D * (i + 1));
+                    Scheduler.AddDelayed(() => TitleText.Children[index].FadeIn(500D), 400D * (i + 1));
                 }
             }
 
@@ -98,8 +98,8 @@ namespace Aurora.Game.Screens
 
                 Scheduler.AddDelayed(() =>
                 {
-                    OurProductIsGoodISwearText.FadeInFromZero(3000D);
-                    OurProductIsGoodISwearText.ScaleTo(new Vector2(1f), 3000D, Easing.OutCubic);
+                    OurProductIsGoodISwearText.FadeInFromZero(2000D);
+                    OurProductIsGoodISwearText.ScaleTo(new Vector2(1f), 2000D, Easing.OutCubic);
                 }, 3000D);
             }
 
@@ -155,7 +155,7 @@ namespace Aurora.Game.Screens
                     x.Colour = Color4Extensions.FromHex("#5865F2");
                 });
 
-                SupporterText.FadeInFromZero(5000D);
+                Scheduler.AddDelayed(() => SupporterText.FadeInFromZero(1000D), 2500D);
             }
 
             #endregion
@@ -178,7 +178,7 @@ namespace Aurora.Game.Screens
                 return;
             }
 
-            Scheduler.AddDelayed(() => this.Push(ScreenToExitTo), 4000D);
+            Scheduler.AddDelayed(() => this.Push(ScreenToExitTo), 3000D);
         }
     }
 }
