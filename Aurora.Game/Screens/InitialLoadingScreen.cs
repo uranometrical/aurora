@@ -1,17 +1,21 @@
 using Aurora.Game.Graphics.Containers;
 using Aurora.Game.Graphics.Utilities;
 using osu.Framework.Allocation;
+using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
 using osu.Framework.Screens;
 using osuTK;
-using osuTK.Graphics;
 
 namespace Aurora.Game.Screens
 {
     public class InitialLoadingScreen : Screen
     {
         public Screen ScreenToExitTo { get; init; }
+
+        protected LinkTextFlowContainer TitleText { get; private set; }
+
+        protected LinkTextFlowContainer OurProductIsGoodISwearText { get; private set; }
 
         protected LinkTextFlowContainer SupporterText { get; private set; }
 
@@ -20,6 +24,32 @@ namespace Aurora.Game.Screens
         {
             InternalChildren = new Drawable[]
             {
+                TitleText = new LinkTextFlowContainer
+                {
+                    RelativeSizeAxes = Axes.X,
+                    AutoSizeAxes = Axes.Y,
+                    TextAnchor = Anchor.BottomCentre,
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.BottomCentre,
+                    Padding = new MarginPadding(40f),
+                    Alpha = 1f,
+                    Spacing = new Vector2(0f, 6f)
+                },
+
+                OurProductIsGoodISwearText = new LinkTextFlowContainer
+                {
+                    RelativeSizeAxes = Axes.X,
+                    AutoSizeAxes = Axes.Y,
+                    TextAnchor = Anchor.TopCentre,
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.BottomCentre,
+                    Padding = new MarginPadding(20f),
+                    Alpha = 0f,
+                    Spacing = new Vector2(0f, 2f),
+                    Scale = Vector2.Zero,
+                    AlwaysPresent = true
+                },
+
                 SupporterText = new LinkTextFlowContainer
                 {
                     RelativeSizeAxes = Axes.X,
@@ -28,17 +58,107 @@ namespace Aurora.Game.Screens
                     Anchor = Anchor.BottomCentre,
                     Origin = Anchor.BottomCentre,
                     Padding = new MarginPadding(20f),
-                    Alpha = 0,
+                    Alpha = 0f,
                     Spacing = new Vector2(0f, 2f)
                 }
             };
 
-            void creationParameters(SpriteText x) => x.Font = AuroraFont.TorusFont;
+            #region Title Text
 
-            SupporterText.AddText("Hi, click ", creationParameters);
-            SupporterText.AddLink("here", "Opens Google", "https://google.com", null, creationParameters, Color4.White, Color4.Orange);
-            SupporterText.AddText(" to open Google.", creationParameters);
-            SupporterText.FadeInFromZero(500D);
+            {
+                void creationParameters(SpriteText x)
+                {
+                    x.Font = AuroraFont.GetFont(AuroraFont.TORUS_NOTCHED_TYPEFACE, 84f, AuroraFont.FontWeight.Regular);
+                    x.AlwaysPresent = true;
+                    x.Alpha = 0f;
+                }
+
+                TitleText.AddText("A", creationParameters);
+                TitleText.AddText("u", creationParameters);
+                TitleText.AddText("r", creationParameters);
+                TitleText.AddText("o", creationParameters);
+                TitleText.AddText("r", creationParameters);
+                TitleText.AddText("a", creationParameters);
+
+                for (int i = 0; i < TitleText.Children.Count; i++)
+                {
+                    int index = i;
+                    Scheduler.AddDelayed(() => TitleText.Children[index].FadeIn(1000D), 500D * (i + 1));
+                }
+            }
+
+            #endregion
+
+            #region Guys It's Good I Swear Text
+
+            {
+                void creationParameters(SpriteText x) => x.Font = AuroraFont.TorusFont;
+
+                OurProductIsGoodISwearText.AddText("Redefining client launchers.", creationParameters);
+
+                Scheduler.AddDelayed(() =>
+                {
+                    OurProductIsGoodISwearText.FadeInFromZero(3000D);
+                    OurProductIsGoodISwearText.ScaleTo(new Vector2(1f), 3000D, Easing.OutCubic);
+                }, 3000D);
+            }
+
+            #endregion
+
+            #region Supporter Text
+
+            {
+                void creationParameters(SpriteText x) => x.Font = AuroraFont.GetFont(AuroraFont.TORUS_TYPEFACE, 16f);
+
+                SupporterText.AddText("Crafted with ", creationParameters);
+                SupporterText.AddIcon(FontAwesome.Solid.Heart, x =>
+                {
+                    creationParameters(x);
+
+                    x.Colour = Colour4.PaleVioletRed;
+                });
+                SupporterText.AddText(" and free for everyone!", creationParameters);
+                SupporterText.NewLine();
+
+                SupporterText.AddText("Support me through ", creationParameters);
+                SupporterText.AddLink(
+                    "Patreon",
+                    "Opens my Patreon.",
+                    "https://patreon.com/tomatophile",
+                    null,
+                    creationParameters,
+                    Color4Extensions.FromHex("#FF424D").Lighten(0.75f),
+                    Color4Extensions.FromHex("#FF424D")
+                );
+                SupporterText.AddText("! ", creationParameters);
+                SupporterText.AddIcon(FontAwesome.Brands.Patreon, x =>
+                {
+                    creationParameters(x);
+
+                    x.Colour = Color4Extensions.FromHex("#FF424D");
+                });
+
+                SupporterText.NewLine();
+                SupporterText.AddText("Join the ", creationParameters);
+                SupporterText.AddLink("Discord",
+                    "diskc,sfrodsd", "",
+                    null,
+                    creationParameters,
+                    Color4Extensions.FromHex("#5865F2").Lighten(0.75f),
+                    Color4Extensions.FromHex("#5865F2")
+                );
+                SupporterText.AddText(" as well! ", creationParameters);
+                SupporterText.AddIcon(FontAwesome.Brands.Discord, x =>
+                {
+                    creationParameters(x);
+
+                    x.Colour = Color4Extensions.FromHex("#5865F2");
+                });
+
+                SupporterText.FadeInFromZero(5000D);
+            }
+
+            #endregion
         }
 
         public override void OnEntering(IScreen last)
@@ -52,13 +172,13 @@ namespace Aurora.Game.Screens
 
         protected void CheckIfLoaded()
         {
-            if (ScreenToExitTo.LoadState != LoadState.Ready)
+            if (ScreenToExitTo.LoadState != LoadState.Ready || Scheduler.HasPendingTasks)
             {
                 Schedule(CheckIfLoaded);
                 return;
             }
 
-            // this.Push(ScreenToExitTo);
+            Scheduler.AddDelayed(() => this.Push(ScreenToExitTo), 4000D);
         }
     }
 }

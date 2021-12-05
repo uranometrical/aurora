@@ -29,6 +29,17 @@ namespace Aurora.Game
         private void load()
         {
             Resources.AddStore(new DllResourceStore(typeof(AuroraResources).Assembly));
+
+            addFonts();
+        }
+
+        private void addFonts()
+        {
+            AddFont(Resources, "Fonts/Torus-Bold");
+            AddFont(Resources, "Fonts/Torus-Light");
+            AddFont(Resources, "Fonts/Torus-Regular");
+            AddFont(Resources, "Fonts/Torus-SemiBold");
+            AddFont(Resources, "Fonts/TorusNotched-Regular");
         }
     }
 }

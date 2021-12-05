@@ -8,11 +8,15 @@ namespace Aurora.Game.Graphics.Utilities
     {
         public const float DEFAULT_FONT_SIZE = 26f;
 
-        public static Typeface TorusTypeface = new("Torus");
+        public static readonly Typeface TORUS_TYPEFACE = new("Torus", medium: 0, black: 0);
+
+        public static readonly Typeface TORUS_NOTCHED_TYPEFACE = new("TorusNotched", 0, medium: 0, semiBold: 0, bold: 0, black: 0);
 
         public static FontUsage DefaultFont => GetFont();
 
-        public static FontUsage TorusFont => GetFont(TorusTypeface, weight: FontWeight.Regular);
+        public static FontUsage TorusFont => GetFont(TORUS_TYPEFACE, weight: FontWeight.Regular);
+
+        public static FontUsage TorusNotchedFont => GetFont(TORUS_NOTCHED_TYPEFACE, weight: FontWeight.Regular);
 
         public static FontUsage GetFont(
             Typeface? typeface = null,
@@ -22,7 +26,7 @@ namespace Aurora.Game.Graphics.Utilities
             bool fixedWidth = false
         )
         {
-            typeface ??= TorusTypeface;
+            typeface ??= TORUS_TYPEFACE;
 
             return new FontUsage(
                 typeface.Value.FontName,
@@ -78,12 +82,12 @@ namespace Aurora.Game.Graphics.Utilities
 
                 Weights = new Dictionary<FontWeight, int>
                 {
-                    {FontWeight.Light, light },
-                    {FontWeight.Regular, regular },
-                    {FontWeight.Medium, medium },
-                    {FontWeight.SemiBold, semiBold },
-                    {FontWeight.Bold, bold },
-                    {FontWeight.Black, black },
+                    { FontWeight.Light, light },
+                    { FontWeight.Regular, regular },
+                    { FontWeight.Medium, medium },
+                    { FontWeight.SemiBold, semiBold },
+                    { FontWeight.Bold, bold },
+                    { FontWeight.Black, black }
                 };
             }
 
