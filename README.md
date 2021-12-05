@@ -1,2 +1,0 @@
-# Aurora
-Constellar launcher.

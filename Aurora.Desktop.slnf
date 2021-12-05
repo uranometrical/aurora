@@ -1,0 +1,11 @@
+﻿{
+  "solution": {
+    "path": "Aurora.sln",
+    "projects": [
+      "Aurora.Desktop\\Aurora.Desktop.csproj",
+      "Aurora.Game\\Aurora.Game.csproj",
+      "Aurora.Game.Tests\\Aurora.Game.Tests.csproj",
+      "Aurora.Resources\\Aurora.Resources.csproj"
+    ]
+  }
+}
