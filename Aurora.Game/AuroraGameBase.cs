@@ -1,9 +1,11 @@
+using Aurora.Game.API;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.IO.Stores;
 using osuTK;
 using Aurora.Resources;
+using osu.Framework.Platform;
 
 namespace Aurora.Game
 {
@@ -14,6 +16,11 @@ namespace Aurora.Game
         // the screen scaling for all components including the test browser and framework overlays.
 
         protected override Container<Drawable> Content { get; }
+
+        protected Storage? Storage { get; set; }
+
+        private DependencyContainer dependencies;
+        private PluginLoader pluginLoader;
 
         protected AuroraGameBase()
         {
@@ -30,7 +37,22 @@ namespace Aurora.Game
         {
             Resources.AddStore(new DllResourceStore(typeof(AuroraResources).Assembly));
 
+            dependencies.CacheAs(Storage);
+
+            pluginLoader = new PluginLoader(Storage);
+            dependencies.CacheAs(pluginLoader);
+
             addFonts();
+        }
+
+        protected override IReadOnlyDependencyContainer CreateChildDependencies(IReadOnlyDependencyContainer parent) =>
+            dependencies = new DependencyContainer(base.CreateChildDependencies(parent));
+
+        public override void SetHost(GameHost host)
+        {
+            base.SetHost(host);
+
+            Storage ??= host.Storage;
         }
 
         private void addFonts()
