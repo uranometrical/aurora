@@ -10,6 +10,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup Label="Project References">
+    <ProjectReference Include="..\Aurora.Game.Plugins.LunarClient\Aurora.Game.Plugins.LunarClient.csproj" />
     <ProjectReference Include="..\Aurora.Game\Aurora.Game.csproj" />
   </ItemGroup>
   <ItemGroup Label="Resources">

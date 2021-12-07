@@ -5,7 +5,9 @@
       "Aurora.Desktop\\Aurora.Desktop.csproj",
       "Aurora.Game\\Aurora.Game.csproj",
       "Aurora.Game.Tests\\Aurora.Game.Tests.csproj",
-      "Aurora.Resources\\Aurora.Resources.csproj"
+      "Aurora.Resources\\Aurora.Resources.csproj",
+      "Aurora.Game.Plugins.LunarClient\\Aurora.Game.Plugins.LunarClient.csproj",
+      "Aurora.Game.Plugins.LunarClient.Test\\Aurora.Game.Plugins.LunarClient.Test.csproj"
     ]
   }
 }

@@ -1,9 +1,11 @@
+using Aurora.Game.API;
 using Aurora.Game.Graphics.Containers;
 using Aurora.Game.Graphics.Utilities;
 using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Sprites;
+using osu.Framework.Platform;
 using osu.Framework.Screens;
 using osuTK;
 
@@ -18,6 +20,14 @@ namespace Aurora.Game.Screens
         protected LinkTextFlowContainer OurProductIsGoodISwearText { get; private set; }
 
         protected LinkTextFlowContainer SupporterText { get; private set; }
+
+        protected LinkTextFlowContainer LoadingText { get; private set; }
+
+        [Resolved]
+        private Storage? storage { get; set; }
+
+        [Resolved]
+        private PluginLoader pluginLoader { get; set; }
 
         [BackgroundDependencyLoader]
         private void load()
@@ -59,6 +69,18 @@ namespace Aurora.Game.Screens
                     Origin = Anchor.BottomCentre,
                     Padding = new MarginPadding(20f),
                     Alpha = 0f,
+                    Spacing = new Vector2(0f, 2f)
+                },
+
+                LoadingText = new LinkTextFlowContainer
+                {
+                    RelativeSizeAxes = Axes.X,
+                    AutoSizeAxes = Axes.Y,
+                    TextAnchor = Anchor.CentreLeft,
+                    Anchor = Anchor.BottomLeft,
+                    Origin = Anchor.BottomLeft,
+                    Padding = new MarginPadding(20f),
+                    Alpha = 1f,
                     Spacing = new Vector2(0f, 2f)
                 }
             };
@@ -166,6 +188,7 @@ namespace Aurora.Game.Screens
             base.OnEntering(last);
 
             LoadComponentAsync(ScreenToExitTo);
+            Scheduler.Add(() => pluginLoader.LoadPlugins());
 
             CheckIfLoaded();
         }
