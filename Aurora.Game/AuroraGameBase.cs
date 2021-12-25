@@ -35,7 +35,7 @@ namespace Aurora.Game
         [BackgroundDependencyLoader]
         private void load()
         {
-            Resources.AddStore(new DllResourceStore(typeof(AuroraResources).Assembly));
+            Resources.AddStore(new DllResourceStore(AuroraResources.ResourceAssembly));
 
             dependencies.CacheAs(Storage);
 

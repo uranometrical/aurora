@@ -1,13 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>Library</OutputType>
-        <TargetFramework>net5.0</TargetFramework>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Aurora.Game\Aurora.Game.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Aurora.Game\Aurora.Game.csproj"/>
+  </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Include="Fonts\**\*"/>
+    <EmbeddedResource Include="Samples\**\*"/>
+    <EmbeddedResource Include="Textures\**\*"/>
+    <EmbeddedResource Include="Tracks\**\*"/>
+  </ItemGroup>
+  
 </Project>
