@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup Label="Project">
     <TargetFramework>net5.0</TargetFramework>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <AssemblyName>Aurora</AssemblyName>
     <ApplicationIcon>game.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
@@ -12,8 +12,5 @@
   <ItemGroup Label="Project References">
     <ProjectReference Include="..\Aurora.Game.Plugins.LunarClient\Aurora.Game.Plugins.LunarClient.csproj" />
     <ProjectReference Include="..\Aurora.Game\Aurora.Game.csproj" />
-  </ItemGroup>
-  <ItemGroup Label="Resources">
-    <EmbeddedResource Include="game.ico" />
   </ItemGroup>
 </Project>

@@ -188,7 +188,16 @@ namespace Aurora.Game.Screens
             base.OnEntering(last);
 
             LoadComponentAsync(ScreenToExitTo);
-            Scheduler.Add(() => pluginLoader.LoadPlugins());
+            Scheduler.Add(() =>
+            {
+                pluginLoader.LoadPlugins();
+
+                if (Game is AuroraGame aurora)
+                {
+                    foreach (Plugin plugin in pluginLoader.LoadedPlugins)
+                        aurora.UtilityBarOverlay?.AddPlugin(plugin);
+                }
+            });
 
             CheckIfLoaded();
         }
