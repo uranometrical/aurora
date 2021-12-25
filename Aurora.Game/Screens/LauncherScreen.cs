@@ -19,6 +19,8 @@ namespace Aurora.Game.Screens
         {
             if (pluginEvent.NewValue is NullPlugin)
             {
+                ClearInternal();
+
                 LinkTextFlowContainer largeText = new()
                 {
                     RelativeSizeAxes = Axes.X,
@@ -78,7 +80,7 @@ namespace Aurora.Game.Screens
             }
 
             ClearInternal();
-            AddInternal(pluginEvent.NewValue.GetPluginContainer());
+            AddRangeInternal(pluginEvent.NewValue.GetPluginDrawables());
         }
 
         public override void OnEntering(IScreen last)

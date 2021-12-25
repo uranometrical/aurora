@@ -66,6 +66,7 @@ namespace Aurora.Game.Overlays
         private readonly SpriteText tooltip2;
         private readonly SpriteText keyBindingTooltip;
         protected FillFlowContainer Flow;
+        private bool CurrentlyRotating;
 
         protected UtilityBarButton()
         {
@@ -99,13 +100,18 @@ namespace Aurora.Game.Overlays
                     AutoSizeAxes = Axes.X,
                     Children = new Drawable[]
                     {
-                        IconContainer = new ConstrainedIconContainer
+                        new Container
                         {
                             Anchor = Anchor.CentreLeft,
                             Origin = Anchor.CentreLeft,
-                            Size = new Vector2(34f),
-                            Alpha = 0,
-                            Colour = Color4.White
+                            Child = IconContainer = new ConstrainedIconContainer
+                            {
+                                Anchor = Anchor.Centre,
+                                Origin = Anchor.Centre,
+                                Size = new Vector2(34f),
+                                Alpha = 0,
+                                Colour = Color4.White
+                            }
                         },
                         DrawableText = new SpriteText
                         {
@@ -147,6 +153,11 @@ namespace Aurora.Game.Overlays
                     }
                 }
             };
+
+            ScheduleAfterChildren(() =>
+            {
+                IconContainer.Icon.Origin = Anchor.Centre;
+            });
         }
 
         protected override bool OnMouseDown(MouseDownEvent e) => true;
@@ -162,6 +173,17 @@ namespace Aurora.Game.Overlays
         {
             HoverBackground.FadeIn(200);
             tooltipContainer.FadeIn(100);
+
+            if (CurrentlyRotating)
+                return base.OnHover(e);
+
+            IconContainer.RotateTo(360f, 1000D, Easing.InOutCubic).Delay(1000D).RotateTo(0f);
+            CurrentlyRotating = true;
+            Scheduler.AddDelayed(() =>
+            {
+                CurrentlyRotating = false;
+            }, 1000D);
+            // IconContainer.Icon.ScaleTo(0.7f, 250D, Easing.InCubic).Delay(250D).ScaleTo(1f, 250D, Easing.OutCubic);
 
             return base.OnHover(e);
         }

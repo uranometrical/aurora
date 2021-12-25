@@ -1,6 +1,6 @@
 using System;
 using Aurora.Game.Overlays;
-using osu.Framework.Graphics.Containers;
+using osu.Framework.Graphics;
 using osu.Framework.Graphics.Textures;
 using osu.Framework.IO.Stores;
 
@@ -24,6 +24,6 @@ namespace Aurora.Game.API
 
         public virtual UtilityBarButton GetButton() => throw new NotImplementedException();
 
-        public virtual Container GetPluginContainer() => throw new NotImplementedException();
+        public virtual Drawable[] GetPluginDrawables() => throw new NotImplementedException();
     }
 }

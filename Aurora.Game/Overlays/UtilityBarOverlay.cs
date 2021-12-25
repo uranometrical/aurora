@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using Aurora.Game.API;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
@@ -74,7 +76,11 @@ namespace Aurora.Game.Overlays
 
             Scheduler.Add(() =>
             {
-                LauncherFlowContainer.Add(plugin.GetButton());
+                // we prepend instead so our initial buttons (x, etc.) are to the right.
+                IEnumerable<Drawable> children = LauncherFlowContainer.Children.ToList(); // ToList() to get a new enumerable
+                children = children.Prepend(plugin.GetButton());
+                LauncherFlowContainer.Clear(false); // don't dispose children
+                LauncherFlowContainer.AddRange(children);
             });
         }
     }
