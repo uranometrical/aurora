@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Aurora.Game.API;
 using Aurora.Game.Overlays;
+using Aurora.Game.Overlays.Settings;
 using Aurora.Game.Screens;
 using osu.Framework.Allocation;
 using osu.Framework.Bindables;
@@ -109,7 +110,8 @@ namespace Aurora.Game
                 }
             });
 
-            loadComponentSingleFile(UtilityBarOverlay = new UtilityBarOverlay(), topMostOverlayContent.Add);
+            loadComponentSingleFile(UtilityBarOverlay = new UtilityBarOverlay(), topMostOverlayContent.Add, true);
+            loadComponentSingleFile(new SettingsOverlay(), leftFloatingOverlayContent.Add, true);
 
             screenStack.Push(new InitialLoadingScreen
             {

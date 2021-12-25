@@ -26,7 +26,7 @@ namespace Aurora.Game.Overlays
         {
             Children = new Drawable[]
             {
-                new UtilityBarBackground(),
+                new UtilityBarBackground(new Colour4(0.075f, 0.075f, 0.075f, 1f)),
                 LauncherFlowContainer = new FillFlowContainer
                 {
                     Anchor = Anchor.TopRight,
