@@ -1,5 +1,6 @@
 using Aurora.Game.Graphics.Containers;
 using Aurora.Game.Graphics.Utilities;
+using Aurora.Game.Overlays.Settings.Panels;
 using osu.Framework.Allocation;
 using osu.Framework.Extensions.Color4Extensions;
 using osu.Framework.Extensions.EnumExtensions;
@@ -57,6 +58,9 @@ namespace Aurora.Game.Overlays.Settings
         private readonly Box flashBackground;
         private readonly FillFlowContainer tooltipContainer;
         private readonly SpriteText tooltip2;
+
+        [Resolved]
+        private SettingsOverlay settings { get; set; }
 
         protected SettingsButton()
         {
@@ -139,6 +143,9 @@ namespace Aurora.Game.Overlays.Settings
         {
             flashBackground.FadeOutFromOne(800, Easing.OutQuint);
             tooltipContainer.FadeOut(100);
+
+            settings.AcceptNewSettings(this);
+
             return base.OnClick(e);
         }
 
@@ -155,5 +162,7 @@ namespace Aurora.Game.Overlays.Settings
             HoverBackground.FadeOut(200);
             tooltipContainer.FadeOut(100);
         }
+
+        public abstract SettingsSection GetSettings();
     }
 }

@@ -1,4 +1,3 @@
-using Aurora.Game.Overlays.Settings.Panels;
 using osu.Framework.Allocation;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
@@ -9,8 +8,6 @@ namespace Aurora.Game.Overlays.Settings
     public class SettingsButtonContainer : Container
     {
         public const float SIZE = 60f;
-
-        private SettingsPanel Panel;
 
         public SettingsButtonContainer()
         {
@@ -34,7 +31,8 @@ namespace Aurora.Game.Overlays.Settings
                     AutoSizeAxes = Axes.X,
                     Children = new Drawable[]
                     {
-                        new DummySettingsButton()
+                        new DummySettingsButton(),
+                        new Dummy2SettingsButton()
                     }
                 }
             };

@@ -41,5 +41,7 @@ namespace Aurora.Game.Overlays.Settings
             panel.MoveToX(-panel.DrawSize.X, 500D, Easing.OutQuint);
             this.FadeOut(500D, Easing.InQuint);
         }
+
+        public void AcceptNewSettings(SettingsButton button) => panel.AcceptNewSettings(button);
     }
 }

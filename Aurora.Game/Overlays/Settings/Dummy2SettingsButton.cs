@@ -6,11 +6,11 @@ using osu.Framework.Graphics;
 
 namespace Aurora.Game.Overlays.Settings
 {
-    public class DummySettingsButton : SettingsButton
+    public class Dummy2SettingsButton : SettingsButton
     {
-        public class DummySection : SettingsSection
+        public class Dummy2Section : SettingsSection
         {
-            public class DummySettingsContent : SettingsContent
+            public class Dummy2SettingsContent : SettingsContent
             {
                 [BackgroundDependencyLoader]
                 private void load()
@@ -19,14 +19,19 @@ namespace Aurora.Game.Overlays.Settings
                     {
                         new SettingsCheckboxItem
                         {
-                            LabelText = "THIS IS A TEST HI",
+                            LabelText = "THIS IS ALSO A TEST",
+                            Current = new Bindable<bool>()
+                        },
+                        new SettingsCheckboxItem
+                        {
+                            LabelText = "THIS IS A TEST AS WELL",
                             Current = new Bindable<bool>()
                         }
                     };
                 }
             }
 
-            public override SettingsContent GetSettings() => new DummySettingsContent();
+            public override SettingsContent GetSettings() => new Dummy2SettingsContent();
         }
 
         [BackgroundDependencyLoader]
@@ -36,6 +41,6 @@ namespace Aurora.Game.Overlays.Settings
             SetIcon("Icons/FontAwesome/gear");
         }
 
-        public override SettingsSection GetSettings() => new DummySection();
+        public override SettingsSection GetSettings() => new Dummy2Section();
     }
 }

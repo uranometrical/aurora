@@ -9,12 +9,13 @@ namespace Aurora.Game.Overlays.Settings.Panels
     public class SettingsPanel : Container
     {
         public const float CONTENT_MARGINS = 20f;
-        public const float TRANSITION_LENGTH = 600f;
         public const float PANEL_WIDTH = 400f;
 
-        protected Container<Drawable> ContentContainer;
+        protected Container<Drawable> ContentContainer = null!;
 
         protected override Container<Drawable> Content => ContentContainer;
+
+        public Container SectionsContainer { get; private set; }
 
         public SettingsPanel()
         {
@@ -42,8 +43,20 @@ namespace Aurora.Game.Overlays.Settings.Panels
                     }
                 }
             };
+
+            Add(SectionsContainer = new Container
+            {
+                Masking = true,
+                RelativeSizeAxes = Axes.Both,
+            });
         }
 
-        public override bool AcceptsFocus => true; // nah we don't need this, but idc
+        public override bool AcceptsFocus => true;
+
+        public void AcceptNewSettings(SettingsButton button)
+        {
+            SectionsContainer.Clear();
+            SectionsContainer.Add(button.GetSettings());
+        }
     }
 }
