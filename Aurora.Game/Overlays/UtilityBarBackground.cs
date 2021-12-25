@@ -10,7 +10,7 @@ namespace Aurora.Game.Overlays
     {
         private readonly Box gradientBackground;
 
-        public UtilityBarBackground()
+        public UtilityBarBackground(Colour4 boxColour)
         {
             RelativeSizeAxes = Axes.Both;
             Children = new Drawable[]
@@ -18,7 +18,7 @@ namespace Aurora.Game.Overlays
                 new Box
                 {
                     RelativeSizeAxes = Axes.Both,
-                    Colour = new Colour4(0.075f, 0.075f, 0.075f, 1f),
+                    Colour = boxColour
                 },
                 gradientBackground = new Box
                 {
@@ -26,7 +26,7 @@ namespace Aurora.Game.Overlays
                     Anchor = Anchor.BottomLeft,
                     Alpha = 0,
                     Height = 50,
-                    Colour = ColourInfo.GradientVertical(new Colour4(0f, 0f, 0f, 1f).Opacity(0.9f), new Colour4(0f, 0f, 0f, 1f).Opacity(0f))
+                    Colour = ColourInfo.GradientVertical(new Colour4(0f, 0f, 0f, 0.9f), new Colour4(0f, 0f, 0f, 0f))
                 },
             };
         }

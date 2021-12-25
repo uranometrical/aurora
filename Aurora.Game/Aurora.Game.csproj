@@ -9,7 +9,4 @@
   <ItemGroup>
     <PackageReference Include="ppy.osu.Framework" Version="2021.1127.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Overlays\Settings" />
-  </ItemGroup>
 </Project>
